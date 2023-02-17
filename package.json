@@ -1,0 +1,24 @@
+{
+  "name": "@kim5257/vue-socket.io-pinia",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/vue-socket.io.js",
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "debug": "^4.3.4",
+    "socket.io-client": "^4.5.3",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-airbnb": "^7.0.0",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "vite": "^4.0.0"
+  }
+}

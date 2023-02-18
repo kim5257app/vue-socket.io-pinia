@@ -47,15 +47,21 @@ export default class Emitter {
       this.listenerList.get(event).forEach((listener) => {
         listener.cb.call(listener.component, args);
       });
+    }
 
-      if (event !== 'ping' && event !== 'pong') {
-        this.dispatchStore(event, args);
-      }
+    if (event !== 'ping' && event !== 'pong') {
+      this.dispatchStore(event, args);
     }
   }
 
   // eslint-disable-next-line class-methods-use-this
   dispatchStore(event, args) {
     logger(`Dispatching Action: ${event}, Data:`, args);
+
+    const prefixedEvent = `${this.actionPrefix}${event}`;
+
+    if (this.store[prefixedEvent] != null) {
+      this.store[prefixedEvent]();
+    }
   }
 }

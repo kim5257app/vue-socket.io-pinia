@@ -15,6 +15,7 @@ module.exports = {
   ],
   rules: {
     'vue/multi-word-component-names': 'off',
+    'func-names': 'off',
   },
   settings: {
     ...createAliasSetting({

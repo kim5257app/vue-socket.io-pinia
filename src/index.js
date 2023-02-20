@@ -51,4 +51,4 @@ export default class VueSocketIO {
 
     return conn;
   }
-};
+}

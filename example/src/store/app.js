@@ -6,8 +6,8 @@ export default defineStore('app', {
     connected: false,
   }),
   actions: {
-    'socket.connect': function () {
-      console.log('socket connected');
+    'socket.connect': async function (io) {
+      console.log('socket connected:', io);
       this.connected = true;
     },
   },

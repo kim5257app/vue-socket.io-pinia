@@ -42,26 +42,26 @@ export default class Emitter {
 
   emit(event, ...args) {
     if (this.listenerList.has(event)) {
-      logger(`Broadcasting: #${event}, Data:`, args);
+      logger(`Broadcasting: #${event}, Data:`, ...args);
 
       this.listenerList.get(event).forEach((listener) => {
-        listener.cb.call(listener.component, args);
+        listener.cb.call(listener.component, ...args);
       });
     }
 
     if (event !== 'ping' && event !== 'pong') {
-      this.dispatchStore(event, args);
+      this.dispatchStore(event, ...args);
     }
   }
 
   // eslint-disable-next-line class-methods-use-this
-  dispatchStore(event, args) {
+  dispatchStore(event, ...args) {
     logger(`Dispatching Action: ${event}, Data:`, args);
 
     const prefixedEvent = `${this.actionPrefix}${event}`;
 
     if (this.store[prefixedEvent] != null) {
-      this.store[prefixedEvent]();
+      this.store[prefixedEvent](...args);
     }
   }
 }

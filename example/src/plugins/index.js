@@ -11,7 +11,7 @@ import pinia from '../store';
 import router from '../router';
 
 // eslint-disable-next-line import/no-relative-packages
-import VueSocketIO from '../../../dist/vue-socket.io-pinia';
+import VueSocketIO from '../../../src';
 
 import appStore from '../store/app';
 
@@ -25,7 +25,7 @@ export function registerPlugins(app) {
 
   const vueSocketIO = new VueSocketIO({
     debug: true,
-    connection: 'https://msg.bibc.co.kr',
+    connection: 'https://msg.manolab.co.kr',
     pinia: {
       store: appStore(),
       actionPrefix: 'socket.',

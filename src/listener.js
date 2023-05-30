@@ -24,17 +24,17 @@ export default class Listener {
 
   register() {
     this.io.onAny((event, ...args) => {
-      this.onEvent(event, args);
+      this.onEvent(event, ...args);
     });
 
     Listener.staticEvents.forEach((event) => {
       this.io.on(event, (...args) => {
-        this.onEvent(event, args);
+        this.onEvent(event, ...args);
       });
     });
   }
 
   onEvent(event, ...args) {
-    this.emitter.emit(event, args);
+    this.emitter.emit(event, this.io, ...args);
   }
 }

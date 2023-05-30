@@ -1,9 +1,9 @@
 {
   "name": "@kim5257/vue-socket.io-pinia",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "type": "module",
-  "main": "dist/vue-socket.io.js",
+  "main": "dist/vue-socket.io-pinia.js",
   "scripts": {
     "build": "vite build",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"

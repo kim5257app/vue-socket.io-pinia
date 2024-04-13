@@ -1,5 +1,5 @@
 import SocketIO from 'socket.io-client';
-import * as debugModule from 'debug';
+import debugModule from 'debug';
 
 import Mixin from './mixin';
 import Emitter from './emitter';

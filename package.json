@@ -1,6 +1,6 @@
 {
   "name": "@kim5257/vue-socket.io-pinia",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "type": "module",
   "main": "dist/vue-socket.io-pinia.js",

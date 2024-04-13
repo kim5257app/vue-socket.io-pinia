@@ -24,8 +24,8 @@ export function registerPlugins(app) {
     .use(router);
 
   const vueSocketIO = new VueSocketIO({
-    debug: true,
-    connection: 'https://msg.manolab.co.kr',
+    debug: false,
+    connection: 'http://localhost:4000',
     pinia: {
       store: appStore(),
       actionPrefix: 'socket.',

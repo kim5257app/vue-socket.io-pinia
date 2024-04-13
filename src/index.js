@@ -1,5 +1,5 @@
 import SocketIO from 'socket.io-client';
-import debugModule from 'debug';
+import * as debugModule from 'debug';
 
 import Mixin from './mixin';
 import Emitter from './emitter';
@@ -16,6 +16,8 @@ export default class VueSocketIO {
   }) {
     if (debug) {
       debugModule.enable('vue-socket.io:*');
+    } else {
+      debugModule.disable('vue-socket.io:*');
     }
 
     this.options = options;

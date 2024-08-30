@@ -1,23 +1,112 @@
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router';
+import HelloWorld from './components/HelloWorld.vue';
+import { useAppStore } from '@/stores/app';
+import { inject, watch } from 'vue';
+import { useSocketListener } from 'vue-socket.io-pinia';
+import type { Socket } from 'socket.io-client';
+
+const appStore = useAppStore();
+
+appStore.$subscribe((mutation, state) => {
+  console.log('sub:', mutation, state);
+}, { immediate: true });
+
+watch(() => appStore.connected, async (newValue, oldValue) => {
+  console.log('watch:', newValue, oldValue);
+}, { immediate: true })
+
+const socket = inject('$socket') as Socket;
+const socketListener = useSocketListener();
+
+socketListener.subscribe('testpong', (socket, payload) => {
+  console.log('pong:', payload);
+});
+
+setInterval(() => {
+  socket.emit('testping', { text: 'test' }, (resp) => {
+    console.log('ping resp:', resp);
+  });
+}, 10000);
+</script>
+
 <template>
+  <header>
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <hello-world msg="You did it!" />
+
+      <nav>
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
+      </nav>
+    </div>
+  </header>
+
   <router-view />
 </template>
 
-<script>
-import { mapState } from 'pinia';
-import appStore from '@/store/app';
+<style scoped>
+header {
+  line-height: 1.5;
+  max-height: 100vh;
+}
 
-export default {
-  name: 'App',
-  computed: {
-    ...mapState(appStore, ['connected']),
-  },
-  watch: {
-    connected: {
-      immediate: true,
-      handler(value) {
-        console.log('connected:', value);
-      },
-    },
-  },
-};
-</script>
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+nav {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+nav a.router-link-exact-active {
+  color: var(--color-text);
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    text-align: left;
+    margin-left: -1rem;
+    font-size: 1rem;
+
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
+}
+</style>

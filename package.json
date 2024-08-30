@@ -1,24 +1,37 @@
 {
   "name": "@kim5257/vue-socket.io-pinia",
-  "version": "1.0.4",
+  "version": "2.0.0-next",
   "license": "MIT",
   "type": "module",
   "main": "dist/vue-socket.io-pinia.js",
+  "module": "dist/vue-socket.io-pinia.js",
+  "types": "dist/vue-socket.io-pinia.d.ts",
   "scripts": {
-    "build": "vite build",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "build-only": "vite build; npx dts-bundle-generator -o dist/vue-socket.io-pinia.d.ts src/index.ts",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "socket.io-client": "^4.6.0",
-    "vue": "^3.2.47"
+    "pinia": "^2.2.2",
+    "socket.io-client": "^4.7.5",
+    "vue": "^3.4.29"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.2.0",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vue/eslint-config-airbnb": "^7.0.0",
-    "eslint": "^8.34.0",
-    "eslint-plugin-vue": "^9.9.0",
-    "vite": "^4.1.2"
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.14.5",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/tsconfig": "^0.5.1",
+    "dts-bundle-generator": "^9.5.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "npm-run-all2": "^6.2.0",
+    "typescript": "~5.4.0",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.21"
   }
 }

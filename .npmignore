@@ -3,6 +3,6 @@ node_modules/
 .eslint.cjs
 .gitignore
 .npmignore
-vite.config.js
+vite.config.ts
 yarn.lock
 example
